@@ -10,7 +10,10 @@
     "test": "jest",
     "test:ci": "jest --ci --runInBand",
     "typecheck": "tsc --noEmit",
-    "export:web": "expo export --platform web"
+    "export:web": "expo export --platform web",
+    "apk": "eas build --platform android --profile preview",
+    "apk:local": "eas build --platform android --profile preview --local",
+    "aab": "eas build --platform android --profile production"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",

@@ -56,6 +56,12 @@ __tests__/              Unit + integration tests
 scripts/generate-assets.js   Brand icon / splash / store-asset generator
 ```
 
+## Try it on your phone
+
+Want to run Tally on a device right now? See **[GET_THE_APK.md](GET_THE_APK.md)** —
+either load it in Expo Go in ~2 minutes (`npm start`) or build a real installable
+APK in Expo's cloud (`npm run apk`).
+
 ## Develop
 
 ```bash
