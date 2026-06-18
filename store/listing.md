@@ -69,9 +69,14 @@ Host `PRIVACY.md` (e.g. GitHub Pages) and paste the public URL here.
 ## Graphic assets (generated in this repo)
 - App icon (512×512): `assets/store/play-icon-512.png`
 - Feature graphic (1024×500): `assets/store/feature-graphic-1024x500.png`
-- Phone screenshots (min 2, 1080×1920 recommended): capture Today, Progress
-  (heatmaps), Habit detail, and Add-habit screens from a device or emulator.
+- Phone screenshots (1080×1920) — **ready to upload**, in `store/screenshots/`:
+  - `01-today.png` — Today screen (progress ring + habit check-ins)
+  - `02-progress.png` — Progress screen (heatmaps + totals)
+  - `03-detail.png` — Habit detail (stats + history, dark theme)
+
+  These are generated from the app's real palette/layout via
+  `node scripts/generate-screenshots.js`. You can also capture live ones from a
+  device/emulator if you prefer:
 ```
-# Quick screenshot capture once you have an emulator/device:
-#   adb exec-out screencap -p > store/screenshots/01-today.png
+adb exec-out screencap -p > store/screenshots/01-today.png
 ```

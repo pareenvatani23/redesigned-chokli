@@ -72,6 +72,25 @@ required** for this — that's only for publishing to the public Store.
 
 Done — Tally is on your home screen. 🎉
 
+## 🤖 Option C — Let GitHub build the APK for you (automated)
+
+This repo ships a workflow (`.github/workflows/android-apk.yml`) that builds the
+APK in Expo's cloud automatically — no local setup at all.
+
+1. Create a free Expo account at https://expo.dev and make an **access token**
+   (Account → Settings → Access tokens).
+2. In GitHub: **Settings → Secrets and variables → Actions → New repository secret**
+   - Name: `EXPO_TOKEN`
+   - Value: *your token*
+3. Go to the **Actions** tab → **Build Android APK** → **Run workflow**.
+   (It also runs automatically on each push to the feature branch.)
+4. When it finishes, the **APK download link** is in the run log and at
+   https://expo.dev → your project → **Builds**. Open it on your phone to install.
+
+> Heads-up: every run uses EAS build credits, and the free tier is limited. If you
+> only want manual builds, delete the `push:` block in the workflow (a comment in
+> the file shows exactly where).
+
 ### Prefer to build the APK on your own machine?
 If you have **Android Studio / the Android SDK** installed locally, you can build
 without the cloud:
