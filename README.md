@@ -55,6 +55,25 @@ Open the local URL Gradio prints, then:
 2. **Type** a sentence.
 3. Click **Speak** and listen.
 
+## View it on your phone
+
+The app runs on your computer (it loads the model); your phone is just the client.
+
+```bash
+python app.py --share
+```
+
+This prints a temporary **HTTPS** link like `https://xxxx.gradio.live` — open that on
+your phone, then record, type, and Speak.
+
+Why the share link (and not your LAN IP)? Phone browsers only allow **microphone
+recording over HTTPS**. Opening the app via `http://192.168.x.x:7860` on the same Wi‑Fi
+would load the page but the browser would **block the mic** — so use `--share`.
+
+- The link is **temporary (~72h)** and, while live, **anyone who has it can reach the app**.
+- Password-protect it: `GRADIO_AUTH="me:secret" python app.py --share`.
+- Env equivalents: `GRADIO_SHARE=1` (same as `--share`), `GRADIO_PORT` (default 7860).
+
 ## Caveats
 
 - **First run downloads model weights** from Hugging Face — needs internet.

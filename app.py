@@ -1,14 +1,18 @@
 """Voice cloning PoC — record your voice, type a sentence, hear it in your voice.
 
-Run:
+Run locally:
     python app.py
 
-Then open the local URL Gradio prints. Record ~6-10s of clean speech, type a
+View it on your phone (creates a temporary HTTPS link the mic can use):
+    python app.py --share
+
+Then open the URL Gradio prints. Record ~6-10s of clean speech, type a
 sentence, and click "Speak".
 """
 
 from __future__ import annotations
 
+import argparse
 import os
 import shutil
 import uuid
@@ -75,5 +79,26 @@ def build_ui() -> gr.Blocks:
     return demo
 
 
+def _parse_auth(value: str | None):
+    """Turn 'user:pass' into a Gradio auth tuple, or None if unset/blank."""
+    if not value or ":" not in value:
+        return None
+    user, _, password = value.partition(":")
+    return (user, password)
+
+
 if __name__ == "__main__":
-    build_ui().launch(share=False)
+    parser = argparse.ArgumentParser(description="Voice cloning PoC")
+    parser.add_argument(
+        "--share",
+        action="store_true",
+        help="Create a temporary public HTTPS link (needed to use the mic on a phone).",
+    )
+    args = parser.parse_args()
+
+    build_ui().launch(
+        share=args.share or os.getenv("GRADIO_SHARE") == "1",
+        server_name="0.0.0.0",  # reachable on the LAN too (desktop on same Wi-Fi)
+        server_port=int(os.getenv("GRADIO_PORT", "7860")),
+        auth=_parse_auth(os.getenv("GRADIO_AUTH")),  # set GRADIO_AUTH=user:pass to lock it
+    )
